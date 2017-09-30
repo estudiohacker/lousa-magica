@@ -1,6 +1,7 @@
 # Licença GPL3 - mas atribuição é apreciada!
 """
 Desenho com potenciômetros 
+    Arduino + Firmata All Inputs + Potenciômetros
     Alexandre Villares http://abav.lugaralgum.com
     arteprog - arte e programação http://arteprog.space
     Apresentada originalmente na inauguraço do SESC 24 de maio com Estúdio Hacker
@@ -8,12 +9,13 @@ Desenho com potenciômetros
     http://twitter.com/estudiohacker
 """
 
-# Arduino + Firmata All Inputs: foram usados 6 potenciômetros e um
-# interruptor de mercúrio + pull down
 add_library('serial')  # import processing.serial.*;
 add_library('arduino')  # import cc.arduino.*;
-SERIAL = 32  # Precisa mudar! Use println((Arduino.list())) para descobrir
 
+for num, porta_serial in enumerate(Arduino.list()):  # Enumera portas seriais
+    println(str(num)+":"+porta_serial)               # Mostra no console
+PORTA_SERIAL = 0  # Precisa mudar! Leia a lista no console para descobrir
+    
 def setup():
     global arduino
     size(1024, 1024)
@@ -21,7 +23,7 @@ def setup():
     frameRate(30)
     noStroke()
     background(0)
-    arduino = Arduino(this, Arduino.list()[SERIAL], 57600)
+    arduino = Arduino(this, Arduino.list()[PORTA_SERIAL], 57600)
 
 def draw():
     X = arduino.analogRead(5)  # pino A5 (analógico)
