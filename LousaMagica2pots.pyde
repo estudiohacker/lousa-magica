@@ -14,7 +14,7 @@ add_library('arduino')  # import cc.arduino.*;
 
 for num, porta_serial in enumerate(Arduino.list()):  # Enumera portas seriais
     println(str(num)+":"+porta_serial)               # Mostra no console
-PORTA_SERIAL = 0  # Precisa mudar! Leia a lista no console para descobrir
+NUM_PORTA = 0  # Precisa mudar! Leia a lista no console para descobrir
     
 def setup():
     global arduino
@@ -23,7 +23,7 @@ def setup():
     frameRate(30)
     noStroke()
     background(0)
-    arduino = Arduino(this, Arduino.list()[PORTA_SERIAL], 57600)
+    arduino = Arduino(this, Arduino.list()[NUM_PORTA], 57600)
 
 def draw():
     X = arduino.analogRead(5)  # pino A5 (analógico)
